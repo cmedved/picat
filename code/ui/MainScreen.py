@@ -25,7 +25,7 @@ class MainScreen(object):
 		foodList.setPos(40,16)
 		self.items[ITEM_NAME_FEED_LIST] = foodList
 		personList = TextItem("")
-		personList.setPos(0,20)
+		personList.setPos(0,16)
 		self.items[ITEM_NAME_PERSON_LIST] = personList
 		
 	
