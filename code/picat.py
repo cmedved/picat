@@ -12,8 +12,12 @@ import os
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+shouldSwitchScreen = False
+lastActivity = 0
 
 def main():
+	global shouldSwitchScreen
+	global lastActivity
 	fileLocation = os.path.join(os.path.dirname(os.path.realpath(__file__)),'picat.conf')
 
 	cfg = readConf(fileLocation)
@@ -95,9 +99,10 @@ def main():
 			oled.drawScreen()
 			time.sleep(1)
 		else:
-			screenOn = False
-			oled.clear()
-			time.sleep(1)
+			if screenOn:
+				screenOn = False
+				oled.clear()
+				time.sleep(1)
 		if shouldFeed:
 			if led is not None:
 				led.on()

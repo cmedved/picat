@@ -80,7 +80,9 @@ sed -i "s/PIR_PIN = -1/PIR_PIN = $pirPin/g" $CONFIG_FILE
 
 apt-get update
 # Make sure python3 is installed
-apt-get install -y python3-pip
+apt-get install -y python3-pip python3-pil
+pip3 install adafruit-python-shell
+pip3 install adafruit-circuitpython-ssd1306
 # This handy script sets up all the dependencies.
 echo "Running raspi-blinka.py... this might take a while."
 python3 raspi-blinka.py
