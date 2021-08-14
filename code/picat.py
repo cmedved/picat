@@ -26,7 +26,7 @@ def main():
 	NAME1 = cfg['NAME1']
 	NAME2 = cfg['NAME2']
 	SLEEP_INACTIVITY_SEC = int(cfg['SCREEN_SLEEP_SEC'])
-	FEED_INTERVAL_SEC = int(cfg['HOURS_BETWEEN_FEEDS']*3600)
+	FEED_INTERVAL_SEC = int(cfg['HOURS_BETWEEN_FEEDS'])*3600
 	DATA_FILE = '/usr/local/picat/data/foodLog.txt'
 	LED_PIN = int(cfg['LED_PIN'])
 	PIR_PIN = int(cfg['PIR_PIN'])
