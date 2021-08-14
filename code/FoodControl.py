@@ -21,7 +21,6 @@ class FoodControl(object):
 			if len(vals) != 2:
 				continue
 			log = FoodLog(vals[1],vals[0])
-			print(str(vals[1])+" "+str(vals[0]))
 			self.foodLogs.append(log)
 
 	def getLastFeedData(self):

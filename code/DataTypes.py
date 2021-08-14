@@ -1,5 +1,6 @@
 from enum import Enum
 import time
+from datetime import datetime, timezone
 
 class FoodLog(object):
 	def __init__(self,person,time):
@@ -7,7 +8,8 @@ class FoodLog(object):
 		self.time = int(time)
 
 	def getFormattedTime(self):
-		return time.strftime('%m/%d %H:%M', time.gmtime(self.time))
+		localTime = datetime.fromtimestamp(self.time)
+		return localTime.strftime('%m/%d %H:%M')
 
 	def getPerson(self):
 		return self.person

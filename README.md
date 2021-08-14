@@ -34,6 +34,8 @@ Don't forget to set your hostname and password!
 * sudo vi /etc/hostname
 * passwd
 
+You may also want to edit the system timezone to your local time with sudo raspi-config.
+
 ## OLED Bonnet
 Note: The OLED bonnet uses the following GPIO pins (not physical pin numbers)
 * GPIO 5 = ButtonA
