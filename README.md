@@ -2,6 +2,8 @@
 So, this project is full of not-so-good python code, but the goal is to create a device that can
 be stuck to a wall that shows when you last fed some cats.
 
+![Screenshot](resources/picat.png)
+
 ## Usage
 1. Pressing the joystick in any direction switches to a different view.
 2. The #5 and #6 button will record a feeding from different people. This can be edited at the
