@@ -92,6 +92,7 @@ def main():
 	buttonB.when_pressed = buttonBFunc
 	
 	lastActivity = time.time()
+	lastDeleteTime = 0
 	while True:
 		if time.time() - lastActivity < SLEEP_INACTIVITY_SEC:
 			# If there was button or motion sensor activity... draw to the OLED!
@@ -129,6 +130,12 @@ def main():
 				curScreen = bigScreen
 			else:
 				curScreen = ms
+
+		holda = buttonA.held_time
+		holdb = buttonB.held_time
+		if holda and holdb and holda > 3 and holdb > 3 and time.time() - lastDeleteTime > 3:
+			foodControl.removeLastFeed()
+			lastDeleteTime = time.time()
 	
 def readConf(confFile):
 	lines = None

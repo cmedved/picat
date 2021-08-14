@@ -67,3 +67,18 @@ class FoodControl(object):
 			return True
 		else:
 			return False
+
+	def removeLastFeed(self):
+		if len(self.foodLogs) > 0:
+			del self.foodLogs[-1]
+			# Efficiently delete last line of file.
+			# https://stackoverflow.com/questions/1877999/delete-final-line-in-file-with-python
+			with open(self.fileLocation,'r+') as f:
+				f.seek(0, os.SEEK_END)
+				pos = f.tell() - 1
+				while pos > 0 and f.read(1) != "\n":
+					pos -= 1
+					f.seek(pos,os.SEEK_SET)
+				if pos > 0:
+					f.seek(pos,os.SEEK_SET)
+					f.truncate()

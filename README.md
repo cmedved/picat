@@ -5,7 +5,8 @@ So, this project is full of not-so-good python code, but the goal is to create a
 
 ## Usage
 1. Pressing the joystick in any direction switches to a different view.
-2. The #5 and #6 button will record a feeding from different people. This can be edited at the top of the script file.
+2. The #5 and #6 button will record a feeding from different people. This can be edited at the top of the script file. Will only record once every 30 seconds.
+3. Holding both button 5 and 6 for at least 3 seconds will delete the last record every 3 seconds. Pushing the buttons will still initially record a feed though, if not during the 30 second safety window.
 
 There are only two views:
 1. Screen that shows whether cats need food and the last feed time.
