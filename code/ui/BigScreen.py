@@ -11,8 +11,10 @@ ITEM_NAME_TIME = 'time'
 
 class BigScreen(object):
 	def __init__(self,oled,name1,name2):
+		# Sure hope you're using a 128x64 screen
 		self.items = {}
 		self.oled = oled
+		# I don't know why some text gets clipped.
 		title = TextItem("PiCat")
 		title.setPos(100,0)
 		title.setSize(7)

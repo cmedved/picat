@@ -16,6 +16,7 @@ shouldSwitchScreen = False
 lastActivity = 0
 
 def main():
+	# sigh.. globals, I'm sorry. Too lazy to do it right for this.
 	global shouldSwitchScreen
 	global lastActivity
 	fileLocation = os.path.join(os.path.dirname(os.path.realpath(__file__)),'picat.conf')
@@ -55,6 +56,7 @@ def main():
 	
 	foodControl = FoodControl(DATA_FILE)
 	
+	# Yeah, this is how we're gonna switch between screens. I'm sorry.
 	ms = MainScreen(oled,NAME1,NAME2)
 	bigScreen = BigScreen(oled,NAME1,NAME2)
 	curScreen = bigScreen
@@ -64,6 +66,8 @@ def main():
 	
 	screenOn = True
 	shouldSwitchScreen = False
+
+	# Simple callback function for the joystick to switch screens.
 	def switchFunc():
 		global shouldSwitchScreen
 		global lastActivity
@@ -90,6 +94,7 @@ def main():
 	lastActivity = time.time()
 	while True:
 		if time.time() - lastActivity < SLEEP_INACTIVITY_SEC:
+			# If there was button or motion sensor activity... draw to the OLED!
 			screenOn = True
 			food = foodControl.getLastFiveFeeds()
 			shouldFeed = foodControl.shouldFeed(FEED_INTERVAL_SEC)
@@ -100,6 +105,8 @@ def main():
 			time.sleep(1)
 		else:
 			if screenOn:
+				# Only need to clear the screen once to sleep.
+				# Hardware should be OLED, so all black = OFF
 				screenOn = False
 				oled.clear()
 				time.sleep(1)
@@ -110,10 +117,13 @@ def main():
 			if led is not None:
 				led.off()
 		if motionSensor is not None:
+			# Could have used a callback, but nearly all PIR go high for
+			# a min of 2 seconds.
 			motion = motionSensor.motion_detected
 			if motion:
 				lastActivity = time.time()
 		if shouldSwitchScreen:
+			# yikes
 			shouldSwitchScreen = False
 			if curScreen == ms:
 				curScreen = bigScreen

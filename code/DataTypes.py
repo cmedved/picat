@@ -15,6 +15,7 @@ class FoodLog(object):
 		return self.person
 
 class DataTypes(Enum):
+	# Different types of data we can pass around
 	FOOD_ENTRY = 1
 	FOOD_LIST = 2
 	SHOULD_FEED = 3

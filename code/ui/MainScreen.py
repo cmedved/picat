@@ -11,6 +11,7 @@ ITEM_NAME_PERSON_LIST = 'personList'
 
 class MainScreen(object):
 	def __init__(self,oled,name1,name2):
+		# Sure hope you're using a 128x64 screen
 		self.items = {}
 		self.oled = oled
 		title = TextItem("#5 "+name1+"    #6 "+name2)

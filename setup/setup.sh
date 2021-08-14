@@ -11,6 +11,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 function getNum {
+	# Get a number with bash. ew.
 	tmp=
 	while true; do
 		read -p "$1" tmp
@@ -26,6 +27,7 @@ function getNum {
 	done
 }
 
+# Gte all of our values to configure...
 echo "Press enter to skip and use defaults..."
 read -p 'Person1 Name [Person1]: ' person1
 read -p 'Person2 Name [Person2]: ' person2
@@ -57,7 +59,9 @@ echo "Screen sleep seconds = $screenSleep"
 echo "LED Pin = $ledPin"
 echo "PIR Pin = $pirPin"
 read -p "Press any key to continue..."
-if [ ! -e /usr/local/picat ]; then
+
+# "Install it" by putting it in some directory
+if [ ! -e $PICAT_DIR ]; then
 	mkdir $PICAT_DIR
 	mkdir "$PICAT_DIR/log"
 	mkdir "$PICAT_DIR/scripts"
@@ -66,10 +70,13 @@ fi
 cp -Rf ../code/* $PICAT_DIR/scripts
 chmod +x $PICAT_DIR/scripts/picat.py
 chown -R $RUN_USER:$RUN_GROUP $PICAT_DIR
+
+# Install the service so it starts at boot
 cp picat.service /etc/systemd/system/picat.service
 sed -i "s/User=pi/User=$RUN_USER/g" /etc/systemd/system/picat.service
 systemctl enable picat.service
 
+# Set the config params we collected earlier
 CONFIG_FILE=$PICAT_DIR/scripts/picat.conf
 sed -i "s/NAME1 = Person1/NAME1 = $person1/g" $CONFIG_FILE
 sed -i "s/NAME2 = Person2/NAME2 = $person2/g" $CONFIG_FILE
@@ -78,6 +85,7 @@ sed -i "s/HOURS_BETWEEN_FEEDS = 20/HOURS_BETWEEN_FEEDS = $hoursBetweenFeeds/g" $
 sed -i "s/LED_PIN = -1/LED_PIN = $ledPin/g" $CONFIG_FILE
 sed -i "s/PIR_PIN = -1/PIR_PIN = $pirPin/g" $CONFIG_FILE
 
+# Update all the things
 apt-get update
 # Make sure python3 is installed
 apt-get install -y python3-pip python3-pil

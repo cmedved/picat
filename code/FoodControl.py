@@ -10,9 +10,13 @@ class FoodControl(object):
 		if fileLocation is None:
 			fileLocation = os.path.join(os.path.dirname(os.path.realpath(__file__)),'foodData.txt')
 		self.fileLocation = fileLocation
+
+		# Create the file?
 		f = open(self.fileLocation,'a+')
 		f.close()
 		self.foodLogs = []
+
+		# Load the file contents to mem
 		with open(self.fileLocation) as f:
 			content = f.readlines()
 		content = [x.strip() for x in content]
@@ -29,6 +33,7 @@ class FoodControl(object):
 	
 	def addFeed(self,person):
 		curTime = time.time()
+		# Put a 30 sec delay in to prevent accidental double presses!
 		if len(self.foodLogs) == 0 or curTime - self.foodLogs[-1].time > 30:
 			with open(self.fileLocation,'a+') as f:
 				f.write(str(int(curTime))+","+person+"\n")
@@ -45,6 +50,7 @@ class FoodControl(object):
 		return results
 
 	def getLastFiveFeeds(self):
+		# Note, first record is oldest feed
 		results = []
 		i = len(self.foodLogs)-1
 		while i>=0 and len(results) < 5:
