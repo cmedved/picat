@@ -51,7 +51,11 @@ Note: The OLED bonnet uses the following GPIO pins (not physical pin numbers)
 * GPIO 23 = Joystick Right
 * GPIO 4 = Joystick center
 
-Personally, I messed up and soldered my LED AND motion sensor to already used pins because I thought the above were physical pin numbers. So for mine, I need to manually disable joystick up/down :(
+Personally, I messed up and soldered my LED AND motion sensor to already used pins because I thought the above were physical pin numbers. So for mine, I need to manually disable joystick up/down in the code :(
+
+To add the PIR sensor and LED, I cut out a chunk of a proto board with a dremel tool (do it outside). I then place some LED legs I cut off in the desired holes and soldered them, letting extra solder go in. I had it attached to the raspberry pi for the soldering so the legs didn't go to deep into the holes and prevent attaching the bonnet to the pi. I dripped solder on the screen and killed a few pixels.. you may want to cover it.
+
+I'd recommend the LED, the PIR is a lot of trouble if you want to do it nicely though. The LED only needs a GPIO and ground pin. I would recommend a 3-3.3V LED with a 4.7k ohm resistor (or none if you want it super bright). If using PIR as well, you will need 3.3V and another GPIO (or maybe you _could_ use two gpio).
 
 ## Credits
 * raspi-blinka.sh from Adafruit.
